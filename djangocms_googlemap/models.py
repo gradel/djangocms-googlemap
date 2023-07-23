@@ -53,6 +53,15 @@ class GoogleMap(CMSPlugin):
         max_length=255,
         blank=True,
     )
+    locations = models.ManyToManyField(
+        'organization.Location',
+        blank=True,
+        verbose_name='Standorte',
+        help_text=(
+            'Wähle die anzuzeigenden Standorte aus. Standorte ohne Einrichtungstyp '
+            'oder vom Typ "Webseitenbereich" werden nicht berücksichtigt.'
+        )
+    )
     width = models.CharField(
         verbose_name=_('Width'),
         max_length=6,
@@ -169,6 +178,9 @@ class GoogleMap(CMSPlugin):
         if self.title:
             return self.title
         return str(self.pk)
+
+    def copy_relations(self, oldinstance):
+        self.locations.set(oldinstance.locations.all())
 
     def get_short_description(self):
         display = ''

@@ -21,10 +21,13 @@ class GoogleMapPlugin(CMSPluginBase):
     allow_children = True
     child_classes = ['GoogleMapMarkerPlugin', 'GoogleMapRoutePlugin']
 
+    filter_horizontal = ('locations',)
+
     fieldsets = [
         (None, {
             'fields': (
                 'title',
+                'locations',
                 ('width', 'height',),
             )
         }),
