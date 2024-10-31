@@ -20,7 +20,6 @@ class GoogleMapPlugin(CMSPluginBase):
     admin_preview = False
     allow_children = True
     child_classes = ['GoogleMapMarkerPlugin', 'GoogleMapRoutePlugin']
-    cache = False
 
     filter_horizontal = ('locations',)
 
